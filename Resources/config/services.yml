@@ -1,0 +1,4 @@
+services:
+#    wow_apps_proxy_bonanza.example:
+#        class: WowApps\ProxyBonanzaBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]
