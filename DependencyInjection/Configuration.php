@@ -20,9 +20,12 @@ class Configuration implements ConfigurationInterface
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('wow_apps_proxy_bonanza');
 
-        // Here you should define the parameters that are allowed to
-        // configure your bundle. See the documentation linked above for
-        // more information on that topic.
+        $rootNode
+            ->children()
+                ->scalarNode('api_url')->defaultValue('https://api.proxybonanza.com/v1/')->end()
+                ->scalarNode('api_key')->defaultValue('')->end()
+            ->end()
+        ;
 
         return $treeBuilder;
     }

@@ -1,3 +1,0 @@
-wow_apps_proxy_bonanza_homepage:
-    path:     /
-    defaults: { _controller: WowAppsProxyBonanzaBundle:Default:index }
