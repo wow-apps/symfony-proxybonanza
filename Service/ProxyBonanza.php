@@ -6,8 +6,9 @@ use GuzzleHttp\Client as GuzzleClient;
 use GuzzleHttp\Exception\ClientException;
 use WowApps\ProxyBonanzaBundle\DTO\ProxyBonanzaPack;
 use WowApps\ProxyBonanzaBundle\DTO\ProxyBonanzaPlan;
-use WowApps\ProxyBonanzaBundle\Entity\ProxyBonanzaPlan as ProxyBonanzaPlanEntity;
+use WowApps\ProxyBonanzaBundle\Repository\ProxyBonanzaAuthIpsRepository;
 use WowApps\ProxyBonanzaBundle\Repository\ProxyBonanzaPlanRepository;
+use WowApps\ProxyBonanzaBundle\Repository\ProxyBonanzaProxiesRepository;
 use WowApps\ProxyBonanzaBundle\Traits\HelperTrait;
 
 class ProxyBonanza
@@ -20,13 +21,32 @@ class ProxyBonanza
     /** @var GuzzleClient */
     private $guzzleClient;
 
+    /** @var ProxyBonanzaPlanRepository */
+    private $proxyBonanzaPlanRepository;
+
+    /** @var ProxyBonanzaProxiesRepository */
+    private $proxyBonanzaProxiesRepository;
+
+    /** @var ProxyBonanzaAuthIpsRepository */
+    private $proxyBonanzaAuthips;
+
     /**
      * ProxyBonanza constructor.
      * @param array $config
+     * @param ProxyBonanzaPlanRepository $proxyBonanzaPlanRepository
+     * @param ProxyBonanzaProxiesRepository $proxyBonanzaProxiesRepository
+     * @param ProxyBonanzaAuthIpsRepository $proxyBonanzaAuthIpsRepository
      */
-    public function __construct(array $config)
-    {
+    public function __construct(
+        array $config,
+        ProxyBonanzaPlanRepository $proxyBonanzaPlanRepository,
+        ProxyBonanzaProxiesRepository $proxyBonanzaProxiesRepository,
+        ProxyBonanzaAuthIpsRepository $proxyBonanzaAuthIpsRepository
+    ) {
         $this->setConfig($config);
+        $this->proxyBonanzaPlanRepository = $proxyBonanzaPlanRepository;
+        $this->proxyBonanzaProxiesRepository = $proxyBonanzaProxiesRepository;
+        $this->proxyBonanzaAuthips = $proxyBonanzaAuthIpsRepository;
         $this->guzzleClient = new GuzzleClient(
             ['headers' => ['Authorization' => $this->config['api_key']]]
         );
@@ -119,6 +139,7 @@ class ProxyBonanza
             throw new \InvalidArgumentException('Can\'t get ip packs for empty plans');
         }
 
+        /** @var ProxyBonanzaPlan $proxyBonanzaPlan */
         foreach ($proxyBonanzaPlans as $proxyBonanzaPlan) {
             $proxyBonanzaPackUrl = $this->config['api_url']
                 . sprintf('userpackages/%s.json', $proxyBonanzaPlan->getPlanId());
@@ -131,6 +152,8 @@ class ProxyBonanza
                 $ipPack = new ProxyBonanzaPack();
                 $ipPack
                     ->setPackIp($item['ip'])
+                    ->setPackLogin($proxyBonanzaPlan->getPlanLogin())
+                    ->setPackPassword($proxyBonanzaPlan->getPlanPassword())
                     ->setPackPortHttp((int)$item['port_http'])
                     ->setPackPortSocks((int)$item['port_socks'])
                     ->setPackRegionId((int)$item['proxyserver']['georegion_id'])
@@ -152,10 +175,51 @@ class ProxyBonanza
         return $proxyBonanzaPlans;
     }
 
-    public function updateLocalDataFromRemote()
+    /**
+     * @param \ArrayObject|ProxyBonanzaPlan[] $proxyBonanzaPlans
+     */
+    public function updateLocalDataFromRemote(\ArrayObject $proxyBonanzaPlans = null)
     {
-        $proxyBonanzaPlans = $this->getRemotePlans();
-        $proxyBonanzaPlans = $this->getRemotePacks($proxyBonanzaPlans);
-        //TODO
+        if (is_null($proxyBonanzaPlans) || !$proxyBonanzaPlans->count()) {
+            $proxyBonanzaPlans = $this->getRemotePlans();
+            $proxyBonanzaPlans = $this->getRemotePacks($proxyBonanzaPlans);
+        }
+
+        $this->proxyBonanzaPlanRepository->empty();
+        $this->proxyBonanzaPlanRepository->insertPlans($proxyBonanzaPlans);
+
+        $this->proxyBonanzaProxiesRepository->empty();
+        $this->proxyBonanzaProxiesRepository->insertProxies($proxyBonanzaPlans);
+
+        $this->proxyBonanzaAuthips->empty();
+        $this->proxyBonanzaAuthips->insertAuthIps($proxyBonanzaPlans);
+    }
+
+    /**
+     * @param ProxyBonanzaPack $proxyBonanzaPack
+     * @return bool
+     */
+    public function testProxyConnection(ProxyBonanzaPack $proxyBonanzaPack): bool
+    {
+        $client = new GuzzleClient();
+
+        $proxy = [
+            'http' => 'tcp://' . $proxyBonanzaPack->getPackLogin() . ':'
+                . $proxyBonanzaPack->getPackPassword() . '@'
+                . $proxyBonanzaPack->getPackIp() . ':'
+                . $proxyBonanzaPack->getPackPortHttp(),
+            'https' => 'tcp://' . $proxyBonanzaPack->getPackLogin() . ':'
+                . $proxyBonanzaPack->getPackPassword() . '@'
+                . $proxyBonanzaPack->getPackIp() . ':'
+                . $proxyBonanzaPack->getPackPortHttp()
+        ];
+
+        $response = $client->request('GET', 'http://google.com', ['proxy' => $proxy]);
+
+        if (!in_array($response->getStatusCode(), [200, 301, 302])) {
+            return false;
+        }
+
+        return true;
     }
 }

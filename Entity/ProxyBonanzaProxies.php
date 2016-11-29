@@ -7,12 +7,9 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Table(
  *     name="proxybonanza_proxies",
- *     options={"collate"="utf8_unicode_ci", "charset"="utf8", "engine"="InnoDB"},
- *     indexes={
- *      @ORM\Index(name="ix_proxybonanza_proxies_1", columns={"proxy_id"}),
- *     }
+ *     options={"collate"="utf8_unicode_ci", "charset"="utf8", "engine"="InnoDB"}
  * )
- * @ORM\Entity(repositoryClass="Op\CompetitorsBundle\Repository\ProxyBonanzaProxiesRepository")
+ * @ORM\Entity(repositoryClass="WowApps\ProxyBonanzaBundle\Repository\ProxyBonanzaProxiesRepository")
  */
 class ProxyBonanzaProxies
 {
@@ -78,10 +75,12 @@ class ProxyBonanzaProxies
 
     /**
      * @param int $proxyId
+     * @return ProxyBonanzaProxies
      */
-    public function setProxyId(int $proxyId)
+    public function setProxyId(int $proxyId): ProxyBonanzaProxies
     {
         $this->proxyId = $proxyId;
+        return $this;
     }
 
     /**
@@ -94,10 +93,12 @@ class ProxyBonanzaProxies
 
     /**
      * @param int $proxyPlan
+     * @return ProxyBonanzaProxies
      */
-    public function setProxyPlan(int $proxyPlan)
+    public function setProxyPlan(int $proxyPlan): ProxyBonanzaProxies
     {
         $this->proxyPlan = $proxyPlan;
+        return $this;
     }
 
     /**
@@ -110,10 +111,12 @@ class ProxyBonanzaProxies
 
     /**
      * @param string $proxyIp
+     * @return ProxyBonanzaProxies
      */
-    public function setProxyIp(string $proxyIp)
+    public function setProxyIp(string $proxyIp): ProxyBonanzaProxies
     {
         $this->proxyIp = $proxyIp;
+        return $this;
     }
 
     /**
@@ -126,10 +129,12 @@ class ProxyBonanzaProxies
 
     /**
      * @param int $proxyPortHttp
+     * @return ProxyBonanzaProxies
      */
-    public function setProxyPortHttp(int $proxyPortHttp)
+    public function setProxyPortHttp(int $proxyPortHttp): ProxyBonanzaProxies
     {
         $this->proxyPortHttp = $proxyPortHttp;
+        return $this;
     }
 
     /**
@@ -142,10 +147,12 @@ class ProxyBonanzaProxies
 
     /**
      * @param int $proxyPortSocks
+     * @return ProxyBonanzaProxies
      */
-    public function setProxyPortSocks(int $proxyPortSocks)
+    public function setProxyPortSocks(int $proxyPortSocks): ProxyBonanzaProxies
     {
         $this->proxyPortSocks = $proxyPortSocks;
+        return $this;
     }
 
     /**
@@ -158,10 +165,12 @@ class ProxyBonanzaProxies
 
     /**
      * @param int $proxyRegionId
+     * @return ProxyBonanzaProxies
      */
-    public function setProxyRegionId(int $proxyRegionId)
+    public function setProxyRegionId(int $proxyRegionId): ProxyBonanzaProxies
     {
         $this->proxyRegionId = $proxyRegionId;
+        return $this;
     }
 
     /**
@@ -174,10 +183,12 @@ class ProxyBonanzaProxies
 
     /**
      * @param string $proxyRegionName
+     * @return ProxyBonanzaProxies
      */
-    public function setProxyRegionName(string $proxyRegionName)
+    public function setProxyRegionName(string $proxyRegionName): ProxyBonanzaProxies
     {
         $this->proxyRegionName = $proxyRegionName;
+        return $this;
     }
 
     /**
@@ -190,9 +201,11 @@ class ProxyBonanzaProxies
 
     /**
      * @param string $proxyRegionCountryName
+     * @return ProxyBonanzaProxies
      */
-    public function setProxyRegionCountryName(string $proxyRegionCountryName)
+    public function setProxyRegionCountryName(string $proxyRegionCountryName): ProxyBonanzaProxies
     {
         $this->proxyRegionCountryName = $proxyRegionCountryName;
+        return $this;
     }
 }

@@ -7,6 +7,12 @@ class ProxyBonanzaPack
     /** @var string */
     private $packIp;
 
+    /** @var string */
+    private $packLogin;
+
+    /** @var string */
+    private $packPassword;
+
     /** @var int */
     private $packPortHttp;
 
@@ -37,6 +43,42 @@ class ProxyBonanzaPack
     public function setPackIp(string $packIp)
     {
         $this->packIp = $packIp;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPackLogin(): string
+    {
+        return $this->packLogin;
+    }
+
+    /**
+     * @param string $packLogin
+     * @return ProxyBonanzaPack
+     */
+    public function setPackLogin(string $packLogin): ProxyBonanzaPack
+    {
+        $this->packLogin = $packLogin;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPackPassword(): string
+    {
+        return $this->packPassword;
+    }
+
+    /**
+     * @param string $packPassword
+     * @return ProxyBonanzaPack
+     */
+    public function setPackPassword(string $packPassword): ProxyBonanzaPack
+    {
+        $this->packPassword = $packPassword;
         return $this;
     }
 
@@ -99,7 +141,7 @@ class ProxyBonanzaPack
      */
     public function getPackRegionName(): string
     {
-        return $this->packRegionName;
+        return (!is_null($this->packRegionName) ? $this->packRegionName : '');
     }
 
     /**
@@ -117,7 +159,7 @@ class ProxyBonanzaPack
      */
     public function getPackRegionCountryName(): string
     {
-        return $this->packRegionCountryName;
+        return (!is_null($this->packRegionCountryName) ? $this->packRegionCountryName : '');
     }
 
     /**

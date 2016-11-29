@@ -12,6 +12,9 @@ abstract class AbstractRepository extends EntityRepository
     /** @var PDOConnection */
     protected $db;
 
+    /** @var EntityManager */
+    protected $em;
+
     /**
      * AbstractRepository constructor.
      * @param EntityManager $em
@@ -20,6 +23,7 @@ abstract class AbstractRepository extends EntityRepository
     public function __construct(EntityManager $em, Mapping\ClassMetadata $class)
     {
         parent::__construct($em, $class);
+        $this->em = $em;
         $this->db = $em->getConnection();
     }
 

@@ -7,12 +7,9 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Table(
  *     name="proxybonanza_plan",
- *     options={"collate"="utf8_unicode_ci", "charset"="utf8", "engine"="InnoDB"},
- *     indexes={
- *      @ORM\Index(name="ix_proxybonanza_plan_1", columns={"plan_id"}),
- *     }
+ *     options={"collate"="utf8_unicode_ci", "charset"="utf8", "engine"="InnoDB"}
  * )
- * @ORM\Entity(repositoryClass="Op\CompetitorsBundle\Repository\ProxyBonanzaPlanRepository")
+ * @ORM\Entity(repositoryClass="WowApps\ProxyBonanzaBundle\Repository\ProxyBonanzaPlanRepository")
  */
 class ProxyBonanzaPlan
 {
@@ -22,7 +19,6 @@ class ProxyBonanzaPlan
      * @var integer
      * @ORM\Column(name="plan_id", type="integer")
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $planId;
 
@@ -102,10 +98,12 @@ class ProxyBonanzaPlan
 
     /**
      * @param int $planId
+     * @return ProxyBonanzaPlan
      */
-    public function setPlanId(int $planId)
+    public function setPlanId(int $planId): ProxyBonanzaPlan
     {
         $this->planId = $planId;
+        return $this;
     }
 
     /**
@@ -118,10 +116,12 @@ class ProxyBonanzaPlan
 
     /**
      * @param string $planLogin
+     * @return ProxyBonanzaPlan
      */
-    public function setPlanLogin(string $planLogin)
+    public function setPlanLogin(string $planLogin): ProxyBonanzaPlan
     {
         $this->planLogin = $planLogin;
+        return $this;
     }
 
     /**
@@ -134,26 +134,30 @@ class ProxyBonanzaPlan
 
     /**
      * @param string $planPassword
+     * @return ProxyBonanzaPlan
      */
-    public function setPlanPassword(string $planPassword)
+    public function setPlanPassword(string $planPassword): ProxyBonanzaPlan
     {
         $this->planPassword = $planPassword;
+        return $this;
     }
 
     /**
-     * @return DateTime
+     * @return \DateTime
      */
-    public function getPlanExpires(): DateTime
+    public function getPlanExpires(): \DateTime
     {
         return $this->planExpires;
     }
 
     /**
-     * @param DateTime $planExpires
+     * @param \DateTime $planExpires
+     * @return ProxyBonanzaPlan
      */
-    public function setPlanExpires(DateTime $planExpires)
+    public function setPlanExpires(\DateTime $planExpires): ProxyBonanzaPlan
     {
         $this->planExpires = $planExpires;
+        return $this;
     }
 
     /**
@@ -166,10 +170,12 @@ class ProxyBonanzaPlan
 
     /**
      * @param int $planBandwidth
+     * @return ProxyBonanzaPlan
      */
-    public function setPlanBandwidth(int $planBandwidth)
+    public function setPlanBandwidth(int $planBandwidth): ProxyBonanzaPlan
     {
         $this->planBandwidth = $planBandwidth;
+        return $this;
     }
 
     /**
@@ -182,10 +188,12 @@ class ProxyBonanzaPlan
 
     /**
      * @param \DateTime $planLastIpChange
+     * @return ProxyBonanzaPlan
      */
-    public function setPlanLastIpChange(\DateTime $planLastIpChange)
+    public function setPlanLastIpChange(\DateTime $planLastIpChange): ProxyBonanzaPlan
     {
         $this->planLastIpChange = $planLastIpChange;
+        return $this;
     }
 
     /**
@@ -198,10 +206,12 @@ class ProxyBonanzaPlan
 
     /**
      * @param string $planPackageName
+     * @return ProxyBonanzaPlan
      */
-    public function setPlanPackageName(string $planPackageName)
+    public function setPlanPackageName(string $planPackageName): ProxyBonanzaPlan
     {
         $this->planPackageName = $planPackageName;
+        return $this;
     }
 
     /**
@@ -214,10 +224,12 @@ class ProxyBonanzaPlan
 
     /**
      * @param string $planPackageBandwidth
+     * @return ProxyBonanzaPlan
      */
-    public function setPlanPackageBandwidth(string $planPackageBandwidth)
+    public function setPlanPackageBandwidth(string $planPackageBandwidth): ProxyBonanzaPlan
     {
         $this->planPackageBandwidth = $planPackageBandwidth;
+        return $this;
     }
 
     /**
@@ -230,10 +242,12 @@ class ProxyBonanzaPlan
 
     /**
      * @param float $planPackagePrice
+     * @return ProxyBonanzaPlan
      */
-    public function setPlanPackagePrice(float $planPackagePrice)
+    public function setPlanPackagePrice(float $planPackagePrice): ProxyBonanzaPlan
     {
         $this->planPackagePrice = $planPackagePrice;
+        return $this;
     }
 
     /**
@@ -246,10 +260,12 @@ class ProxyBonanzaPlan
 
     /**
      * @param int $planPackageHowmanyIps
+     * @return ProxyBonanzaPlan
      */
-    public function setPlanPackageHowmanyIps(int $planPackageHowmanyIps)
+    public function setPlanPackageHowmanyIps(int $planPackageHowmanyIps): ProxyBonanzaPlan
     {
         $this->planPackageHowmanyIps = $planPackageHowmanyIps;
+        return $this;
     }
 
     /**
@@ -262,10 +278,12 @@ class ProxyBonanzaPlan
 
     /**
      * @param int $planPackagePricePerGig
+     * @return ProxyBonanzaPlan
      */
-    public function setPlanPackagePricePerGig(int $planPackagePricePerGig)
+    public function setPlanPackagePricePerGig(int $planPackagePricePerGig): ProxyBonanzaPlan
     {
         $this->planPackagePricePerGig = $planPackagePricePerGig;
+        return $this;
     }
 
     /**
@@ -278,9 +296,11 @@ class ProxyBonanzaPlan
 
     /**
      * @param string $planPackageType
+     * @return ProxyBonanzaPlan
      */
-    public function setPlanPackageType(string $planPackageType)
+    public function setPlanPackageType(string $planPackageType): ProxyBonanzaPlan
     {
         $this->planPackageType = $planPackageType;
+        return $this;
     }
 }

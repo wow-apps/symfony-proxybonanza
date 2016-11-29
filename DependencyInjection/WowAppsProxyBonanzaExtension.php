@@ -25,6 +25,7 @@ class WowAppsProxyBonanzaExtension extends Extension
         $container->setParameter('wowapps.proxybonanza.config', $config);
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        $loader->load('repositories.yml');
         $loader->load('services.yml');
     }
 }
