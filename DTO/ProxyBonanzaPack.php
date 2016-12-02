@@ -7,6 +7,9 @@ class ProxyBonanzaPack
     /** @var string */
     private $packIp;
 
+    /** @var int */
+    private $packPlan;
+
     /** @var string */
     private $packLogin;
 
@@ -43,6 +46,24 @@ class ProxyBonanzaPack
     public function setPackIp(string $packIp)
     {
         $this->packIp = $packIp;
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPackPlan(): int
+    {
+        return $this->packPlan;
+    }
+
+    /**
+     * @param int $packPlan
+     * @return ProxyBonanzaPack
+     */
+    public function setPackPlan(int $packPlan)
+    {
+        $this->packPlan = $packPlan;
         return $this;
     }
 

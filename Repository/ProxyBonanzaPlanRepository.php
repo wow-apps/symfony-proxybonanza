@@ -48,4 +48,35 @@ class ProxyBonanzaPlanRepository extends AbstractRepository
 
         return true;
     }
+
+    /**
+     * @return \ArrayObject|ProxyBonanzaPlanDTO[]
+     */
+    public function getLocalPlans(): \ArrayObject
+    {
+        $proxyBonanzaPlans = new \ArrayObject();
+
+        /** @var ProxyBonanzaPlan $plan */
+        foreach ($this->findAll() as $plan) {
+            $proxyBonanzaPlan = new ProxyBonanzaPlanDTO();
+            $proxyBonanzaPlan
+                ->setPlanId($plan->getPlanId())
+                ->setPlanLogin($plan->getPlanLogin())
+                ->setPlanPassword($plan->getPlanPassword())
+                ->setPlanExpires($plan->getPlanExpires())
+                ->setPlanBandwidth($plan->getPlanBandwidth())
+                ->setPlanLastIpChange($plan->getPlanLastIpChange())
+                ->setPlanPackageName($plan->getPlanPackageName())
+                ->setPlanPackageBandwidth($plan->getPlanPackageBandwidth())
+                ->setPlanPackagePrice($plan->getPlanPackagePrice())
+                ->setPlanPackageHowmanyIps($plan->getPlanPackageHowmanyIps())
+                ->setPlanPackagePricePerGig($plan->getPlanPackagePricePerGig())
+                ->setPlanPackageType($plan->getPlanPackageType())
+            ;
+
+            $proxyBonanzaPlans->offsetSet($proxyBonanzaPlan->getPlanId(), $proxyBonanzaPlan);
+        }
+
+        return $proxyBonanzaPlans;
+    }
 }

@@ -152,6 +152,7 @@ class ProxyBonanza
                 $ipPack = new ProxyBonanzaPack();
                 $ipPack
                     ->setPackIp($item['ip'])
+                    ->setPackPlan($proxyBonanzaPlan->getPlanId())
                     ->setPackLogin($proxyBonanzaPlan->getPlanLogin())
                     ->setPackPassword($proxyBonanzaPlan->getPlanPassword())
                     ->setPackPortHttp((int)$item['port_http'])
@@ -193,6 +194,30 @@ class ProxyBonanza
 
         $this->proxyBonanzaAuthips->empty();
         $this->proxyBonanzaAuthips->insertAuthIps($proxyBonanzaPlans);
+    }
+
+    /**
+     * @return \ArrayObject|ProxyBonanzaPlan[]
+     * @throws \InvalidArgumentException
+     */
+    public function getLocalPlans(): \ArrayObject
+    {
+        $proxyBonanzaPlans = $this->proxyBonanzaPlanRepository->getLocalPlans();
+
+        if (empty($proxyBonanzaPlans)) {
+            throw new \InvalidArgumentException('No local plans founded. Run proxybonanza:update to set local plans.');
+        }
+
+        return $proxyBonanzaPlans;
+    }
+
+    /**
+     * @param ProxyBonanzaPlan|null $proxyBonanzaPlan
+     * @return \ArrayObject|ProxyBonanzaPack[]
+     */
+    public function getLocalProxies(ProxyBonanzaPlan $proxyBonanzaPlan = null): \ArrayObject
+    {
+        return $this->proxyBonanzaProxiesRepository->getLocalProxies($proxyBonanzaPlan);
     }
 
     /**

@@ -48,11 +48,9 @@ class ProxyBonanzaPlan
 
     /**
      * ProxyBonanzaPlan constructor.
-     * @param int $planId
      */
-    public function __construct(int $planId)
+    public function __construct()
     {
-        $this->setPlanId($planId);
         $this->ippacks = new \ArrayObject();
     }
 

@@ -52,4 +52,44 @@ class ProxyBonanzaProxiesRepository extends AbstractRepository
 
         return true;
     }
+
+    /**
+     * @param ProxyBonanzaPlan|null $proxyBonanzaPlan
+     * @return \ArrayObject|ProxyBonanzaPack[]
+     */
+    public function getLocalProxies(ProxyBonanzaPlan $proxyBonanzaPlan = null): \ArrayObject
+    {
+        $proxyBonanzaPacks = new \ArrayObject();
+
+        if (is_null($proxyBonanzaPlan)) {
+            $doctrineResult = $this->findAll();
+        } else {
+            $doctrineResult = $this->findBy(['proxyPlan' => $proxyBonanzaPlan->getPlanId()]);
+        }
+
+        /** @var ProxyBonanzaProxies $proxy */
+        foreach ($doctrineResult as $proxy) {
+            $proxyBonanzaPack = new ProxyBonanzaPack();
+            $proxyBonanzaPack
+                ->setPackPlan($proxy->getProxyPlan())
+                ->setPackIp($proxy->getProxyIp())
+                ->setPackPortHttp($proxy->getProxyPortHttp())
+                ->setPackPortSocks($proxy->getProxyPortSocks())
+                ->setPackRegionId($proxy->getProxyRegionId())
+                ->setPackRegionName($proxy->getProxyRegionName())
+                ->setPackRegionCountryName($proxy->getProxyRegionCountryName())
+            ;
+
+            if (!is_null($proxyBonanzaPlan)) {
+                $proxyBonanzaPack
+                    ->setPackLogin($proxyBonanzaPlan->getPlanLogin())
+                    ->setPackPassword($proxyBonanzaPlan->getPlanPassword())
+                ;
+            }
+
+            $proxyBonanzaPacks->append($proxyBonanzaPack);
+        }
+
+        return $proxyBonanzaPacks;
+    }
 }
