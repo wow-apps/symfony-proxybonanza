@@ -47,6 +47,8 @@ class ProxybonanzaUpdateCommand extends ContainerAwareCommand
         $proxyBonanza->updateLocalDataFromRemote($proxyBonanzaPlans);
 
         $symfonyStyle->success('Proxy list has been updated');
+
+        $symfonyStyle->newLine(2);
     }
 
     /**

@@ -69,16 +69,7 @@ class ProxyBonanzaProxiesRepository extends AbstractRepository
 
         /** @var ProxyBonanzaProxies $proxy */
         foreach ($doctrineResult as $proxy) {
-            $proxyBonanzaPack = new ProxyBonanzaPack();
-            $proxyBonanzaPack
-                ->setPackPlan($proxy->getProxyPlan())
-                ->setPackIp($proxy->getProxyIp())
-                ->setPackPortHttp($proxy->getProxyPortHttp())
-                ->setPackPortSocks($proxy->getProxyPortSocks())
-                ->setPackRegionId($proxy->getProxyRegionId())
-                ->setPackRegionName($proxy->getProxyRegionName())
-                ->setPackRegionCountryName($proxy->getProxyRegionCountryName())
-            ;
+            $proxyBonanzaPack = $this->convertEntity2DTO($proxy);
 
             if (!is_null($proxyBonanzaPlan)) {
                 $proxyBonanzaPack
@@ -91,5 +82,40 @@ class ProxyBonanzaProxiesRepository extends AbstractRepository
         }
 
         return $proxyBonanzaPacks;
+    }
+
+    /**
+     * @return ProxyBonanzaPack
+     */
+    public function getRandomProxy(): ProxyBonanzaPack
+    {
+        $doctrineQuery = $this->createNativeNamedQuery(
+            sprintf('SELECT * FROM %s ORDER BY RAND() LIMIT 1;', ProxyBonanzaProxies::TABLE_NAME)
+        );
+
+        $doctrineResult = $doctrineQuery->getResult();
+        var_dump($doctrineResult);die;
+
+        return $this->convertEntity2DTO($doctrineResult);
+    }
+
+    /**
+     * @param ProxyBonanzaProxies $bonanzaProxy
+     * @return ProxyBonanzaPack
+     */
+    private function convertEntity2DTO(ProxyBonanzaProxies $bonanzaProxy): ProxyBonanzaPack
+    {
+        $proxyBonanzaPack = new ProxyBonanzaPack();
+        $proxyBonanzaPack
+            ->setPackPlan($bonanzaProxy->getProxyPlan())
+            ->setPackIp($bonanzaProxy->getProxyIp())
+            ->setPackPortHttp($bonanzaProxy->getProxyPortHttp())
+            ->setPackPortSocks($bonanzaProxy->getProxyPortSocks())
+            ->setPackRegionId($bonanzaProxy->getProxyRegionId())
+            ->setPackRegionName($bonanzaProxy->getProxyRegionName())
+            ->setPackRegionCountryName($bonanzaProxy->getProxyRegionCountryName())
+        ;
+
+        return $proxyBonanzaPack;
     }
 }

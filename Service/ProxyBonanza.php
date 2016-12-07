@@ -197,6 +197,16 @@ class ProxyBonanza
     }
 
     /**
+     * @param int $planId
+     * @return ProxyBonanzaPlan
+     * @throws \InvalidArgumentException
+     */
+    public function getLocalPlan(int $planId): ProxyBonanzaPlan
+    {
+        return $this->proxyBonanzaPlanRepository->getLocalPlan($planId);
+    }
+
+    /**
      * @return \ArrayObject|ProxyBonanzaPlan[]
      * @throws \InvalidArgumentException
      */
@@ -218,6 +228,14 @@ class ProxyBonanza
     public function getLocalProxies(ProxyBonanzaPlan $proxyBonanzaPlan = null): \ArrayObject
     {
         return $this->proxyBonanzaProxiesRepository->getLocalProxies($proxyBonanzaPlan);
+    }
+
+    /**
+     * @return ProxyBonanzaPack
+     */
+    public function getRandomProxy(): ProxyBonanzaPack
+    {
+        $this->proxyBonanzaProxiesRepository->getRandomProxy();
     }
 
     /**

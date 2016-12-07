@@ -50,6 +50,18 @@ class ProxyBonanzaPlanRepository extends AbstractRepository
     }
 
     /**
+     * @param int $planId
+     * @return ProxyBonanzaPlanDTO
+     */
+    public function getLocalPlan(int $planId): ProxyBonanzaPlanDTO
+    {
+        $plan = $this->findOneBy(['planId' => $planId]);
+        $proxyBonanzaPlanDTO = $this->convertEntity2DTO($plan[$planId]);
+
+        return $proxyBonanzaPlanDTO;
+    }
+
+    /**
      * @return \ArrayObject|ProxyBonanzaPlanDTO[]
      */
     public function getLocalPlans(): \ArrayObject
@@ -58,25 +70,35 @@ class ProxyBonanzaPlanRepository extends AbstractRepository
 
         /** @var ProxyBonanzaPlan $plan */
         foreach ($this->findAll() as $plan) {
-            $proxyBonanzaPlan = new ProxyBonanzaPlanDTO();
-            $proxyBonanzaPlan
-                ->setPlanId($plan->getPlanId())
-                ->setPlanLogin($plan->getPlanLogin())
-                ->setPlanPassword($plan->getPlanPassword())
-                ->setPlanExpires($plan->getPlanExpires())
-                ->setPlanBandwidth($plan->getPlanBandwidth())
-                ->setPlanLastIpChange($plan->getPlanLastIpChange())
-                ->setPlanPackageName($plan->getPlanPackageName())
-                ->setPlanPackageBandwidth($plan->getPlanPackageBandwidth())
-                ->setPlanPackagePrice($plan->getPlanPackagePrice())
-                ->setPlanPackageHowmanyIps($plan->getPlanPackageHowmanyIps())
-                ->setPlanPackagePricePerGig($plan->getPlanPackagePricePerGig())
-                ->setPlanPackageType($plan->getPlanPackageType())
-            ;
-
-            $proxyBonanzaPlans->offsetSet($proxyBonanzaPlan->getPlanId(), $proxyBonanzaPlan);
+            $proxyBonanzaPlanDTO = $this->convertEntity2DTO($plan);
+            $proxyBonanzaPlans->offsetSet($proxyBonanzaPlanDTO->getPlanId(), $proxyBonanzaPlanDTO);
         }
 
         return $proxyBonanzaPlans;
+    }
+
+    /**
+     * @param ProxyBonanzaPlan $proxyBonanzaPlan
+     * @return ProxyBonanzaPlanDTO
+     */
+    private function convertEntity2DTO(ProxyBonanzaPlan $proxyBonanzaPlan): ProxyBonanzaPlanDTO
+    {
+        $proxyBonanzaPlanDTO = new ProxyBonanzaPlanDTO();
+        $proxyBonanzaPlanDTO
+            ->setPlanId($proxyBonanzaPlan->getPlanId())
+            ->setPlanLogin($proxyBonanzaPlan->getPlanLogin())
+            ->setPlanPassword($proxyBonanzaPlan->getPlanPassword())
+            ->setPlanExpires($proxyBonanzaPlan->getPlanExpires())
+            ->setPlanBandwidth($proxyBonanzaPlan->getPlanBandwidth())
+            ->setPlanLastIpChange($proxyBonanzaPlan->getPlanLastIpChange())
+            ->setPlanPackageName($proxyBonanzaPlan->getPlanPackageName())
+            ->setPlanPackageBandwidth($proxyBonanzaPlan->getPlanPackageBandwidth())
+            ->setPlanPackagePrice($proxyBonanzaPlan->getPlanPackagePrice())
+            ->setPlanPackageHowmanyIps($proxyBonanzaPlan->getPlanPackageHowmanyIps())
+            ->setPlanPackagePricePerGig($proxyBonanzaPlan->getPlanPackagePricePerGig())
+            ->setPlanPackageType($proxyBonanzaPlan->getPlanPackageType())
+        ;
+
+        return $proxyBonanzaPlanDTO;
     }
 }
