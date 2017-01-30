@@ -28,13 +28,15 @@ class ProxybonanzaUpdateCommand extends ContainerAwareCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        $timeStart = microtime(true);
+
         /** @var ProxyBonanza $proxyBonanza */
         $proxyBonanza = $this->getContainer()->get('wowapps.proxybonanza');
 
         $symfonyStyle = new SymfonyStyle($input, $output);
 
 
-        $symfonyStyle->title(' P R O X Y   B O N A N Z A   A P I ');
+        $symfonyStyle->title(' P R O X Y   B O N A N Z A   U P D A T E ');
 
         $proxyBonanzaPlans = $this->getRemotePlans($proxyBonanza, $symfonyStyle);
 
@@ -47,6 +49,8 @@ class ProxybonanzaUpdateCommand extends ContainerAwareCommand
         $proxyBonanza->updateLocalDataFromRemote($proxyBonanzaPlans);
 
         $symfonyStyle->success('Proxy list has been updated');
+
+        $symfonyStyle->note(sprintf('Command is executed in %s seconds', $this->formatSpentTime($timeStart)));
 
         $symfonyStyle->newLine(2);
     }

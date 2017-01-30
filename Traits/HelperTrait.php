@@ -31,4 +31,30 @@ trait HelperTrait
 
         return round($bytes, $precision) . $units[$pow];
     }
+
+    /**
+     * @param \ArrayObject $arrayObject
+     * @return array
+     */
+    public function getArrayObjectKeys(\ArrayObject $arrayObject): array
+    {
+        $keys = [];
+
+        if (!empty($arrayObject)) {
+            foreach ($arrayObject as $key => $value) {
+                $keys[] = $key;
+            }
+        }
+
+        return $keys;
+    }
+
+    /**
+     * @param float $timeStart
+     * @return float
+     */
+    public function formatSpentTime(float $timeStart): float
+    {
+        return round(microtime(true) - $timeStart, 2);
+    }
 }

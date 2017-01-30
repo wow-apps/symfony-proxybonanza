@@ -85,21 +85,6 @@ class ProxyBonanzaProxiesRepository extends AbstractRepository
     }
 
     /**
-     * @return ProxyBonanzaPack
-     */
-    public function getRandomProxy(): ProxyBonanzaPack
-    {
-        $doctrineQuery = $this->createNativeNamedQuery(
-            sprintf('SELECT * FROM %s ORDER BY RAND() LIMIT 1;', ProxyBonanzaProxies::TABLE_NAME)
-        );
-
-        $doctrineResult = $doctrineQuery->getResult();
-        var_dump($doctrineResult);die;
-
-        return $this->convertEntity2DTO($doctrineResult);
-    }
-
-    /**
      * @param ProxyBonanzaProxies $bonanzaProxy
      * @return ProxyBonanzaPack
      */

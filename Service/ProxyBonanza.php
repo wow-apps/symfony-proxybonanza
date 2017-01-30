@@ -227,15 +227,35 @@ class ProxyBonanza
      */
     public function getLocalProxies(ProxyBonanzaPlan $proxyBonanzaPlan = null): \ArrayObject
     {
-        return $this->proxyBonanzaProxiesRepository->getLocalProxies($proxyBonanzaPlan);
+        $proxyPlans = new \ArrayObject();
+        $localProxies = $this->proxyBonanzaProxiesRepository->getLocalProxies($proxyBonanzaPlan);
+
+        if (is_null($proxyBonanzaPlan) && !empty($localProxies)) {
+            foreach ($localProxies as $localProxy) {
+                if ($proxyPlans->offsetExists($localProxy->getPackPlan())) {
+                    $proxyPlan = $proxyPlans->offsetGet($localProxy->getPackPlan());
+                } else {
+                    $proxyPlan = $this->proxyBonanzaPlanRepository->getLocalPlan($localProxy->getPackPlan());
+                }
+
+                $localProxy
+                    ->setPackLogin($proxyPlan->getPlanLogin())
+                    ->setPackPassword($proxyPlan->getPlanPassword())
+                ;
+            }
+        }
+
+        return $localProxies;
     }
 
     /**
+     * @param \ArrayObject|ProxyBonanzaPlan[] $proxyBonanzaPlans
      * @return ProxyBonanzaPack
      */
-    public function getRandomProxy(): ProxyBonanzaPack
+    public function getRandomProxy(\ArrayObject $proxyBonanzaPlans): ProxyBonanzaPack
     {
-        $this->proxyBonanzaProxiesRepository->getRandomProxy();
+        $keys = $this->getArrayObjectKeys($proxyBonanzaPlans);
+        return $proxyBonanzaPlans->offsetGet(array_rand($keys, 1));
     }
 
     /**

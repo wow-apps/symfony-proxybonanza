@@ -55,8 +55,9 @@ class ProxyBonanzaPlanRepository extends AbstractRepository
      */
     public function getLocalPlan(int $planId): ProxyBonanzaPlanDTO
     {
-        $plan = $this->findOneBy(['planId' => $planId]);
-        $proxyBonanzaPlanDTO = $this->convertEntity2DTO($plan[$planId]);
+        /** @var ProxyBonanzaPlan $proxyBonanzaPlan */
+        $proxyBonanzaPlan = $this->findOneBy(['planId' => $planId]);
+        $proxyBonanzaPlanDTO = $this->convertEntity2DTO($proxyBonanzaPlan);
 
         return $proxyBonanzaPlanDTO;
     }
