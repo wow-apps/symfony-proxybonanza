@@ -110,6 +110,7 @@ class ProxyBonanza
         foreach ($proxyBonanzaPlans['data'] as $plan) {
             $proxyBonanzaPlan = new ProxyBonanzaPlan($plan['id']);
             $proxyBonanzaPlan
+                ->setPlanId((int)$plan['id'])
                 ->setPlanLogin($plan['login'])
                 ->setPlanPassword($plan['password'])
                 ->setPlanExpires($this->convertDateTime($plan['expires']))
