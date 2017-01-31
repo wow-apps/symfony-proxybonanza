@@ -184,12 +184,12 @@ class ProxyBonanzaPack
     }
 
     /**
-     * @param string $packRegionCountryName
+     * @param string $regionCountry
      * @return ProxyBonanzaPack
      */
-    public function setPackRegionCountryName(string $packRegionCountryName)
+    public function setPackRegionCountryName(string $regionCountry)
     {
-        $this->packRegionCountryName = $packRegionCountryName;
+        $this->packRegionCountryName = $regionCountry;
         return $this;
     }
 }
