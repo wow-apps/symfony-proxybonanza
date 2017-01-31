@@ -68,57 +68,57 @@ class ProxybonanzaUpdateCommand extends ContainerAwareCommand
         $symfonyStyle->createProgressBar(100);
         $symfonyStyle->progressStart(0);
 
-        /** @var \ArrayObject|ProxyBonanzaPlan[] $proxyBonanzaRemotePlans */
-        $proxyBonanzaRemotePlans = $proxyBonanza->getRemotePlans();
-        if (!$proxyBonanzaRemotePlans->count()) {
-            return $proxyBonanzaRemotePlans;
-        } else {
-            $symfonyStyle->progressAdvance(50);
-
-            $proxyBonanzaRemotePlans = $proxyBonanza->getRemotePacks($proxyBonanzaRemotePlans);
-
-            $symfonyStyle->progressAdvance(50);
-
-            $symfonyStyle->progressFinish();
-
-            $header = [
-                'id',
-                'login',
-                'password',
-                'expires',
-                'bandwidth',
-                'last ip change',
-                'name',
-                'bandwidth',
-                'price',
-                'ip\'s count',
-                'price per gig',
-                'type'
-            ];
-
-            $body = [];
-
-            foreach ($proxyBonanzaRemotePlans as $bonanzaPlan) {
-                $body[] = [
-                    $bonanzaPlan->getPlanId(),
-                    $bonanzaPlan->getPlanLogin(),
-                    $bonanzaPlan->getPlanPassword(),
-                    $bonanzaPlan->getPlanExpires()->format('Y-m-d H:i'),
-                    $this->formatSizeUnits($bonanzaPlan->getPlanBandwidth(), 2),
-                    $bonanzaPlan->getPlanLastIpChange()->format('Y-m-d H:i'),
-                    $bonanzaPlan->getPlanPackageName(),
-                    $this->formatSizeUnits($bonanzaPlan->getPlanPackageBandwidth(), 2),
-                    $bonanzaPlan->getPlanPackagePrice(),
-                    $bonanzaPlan->getPlanPackageHowmanyIps(),
-                    $bonanzaPlan->getPlanPackagePricePerGig(),
-                    $bonanzaPlan->getPlanPackageType()
-                ];
-            }
-
-            $symfonyStyle->table($header, $body);
+        /** @var \ArrayObject|ProxyBonanzaPlan[] $proxyBonanzaPlans */
+        $proxyBonanzaPlans = $proxyBonanza->getRemotePlans();
+        if (!$proxyBonanzaPlans->count()) {
+            return $proxyBonanzaPlans;
         }
 
-        return $proxyBonanzaRemotePlans;
+        $symfonyStyle->progressAdvance(50);
+
+        $proxyBonanzaPlans = $proxyBonanza->getRemotePacks($proxyBonanzaPlans);
+
+        $symfonyStyle->progressAdvance(50);
+
+        $symfonyStyle->progressFinish();
+
+        $header = [
+            'id',
+            'login',
+            'password',
+            'expires',
+            'bandwidth',
+            'last ip change',
+            'name',
+            'bandwidth',
+            'price',
+            'ip\'s count',
+            'price per gig',
+            'type'
+        ];
+
+        $body = [];
+
+        foreach ($proxyBonanzaPlans as $bonanzaPlan) {
+            $body[] = [
+                $bonanzaPlan->getPlanId(),
+                $bonanzaPlan->getPlanLogin(),
+                $bonanzaPlan->getPlanPassword(),
+                $bonanzaPlan->getPlanExpires()->format('Y-m-d H:i'),
+                $this->formatSizeUnits($bonanzaPlan->getPlanBandwidth(), 2),
+                $bonanzaPlan->getPlanLastIpChange()->format('Y-m-d H:i'),
+                $bonanzaPlan->getPlanPackageName(),
+                $this->formatSizeUnits($bonanzaPlan->getPlanPackageBandwidth(), 2),
+                $bonanzaPlan->getPlanPackagePrice(),
+                $bonanzaPlan->getPlanPackageHowmanyIps(),
+                $bonanzaPlan->getPlanPackagePricePerGig(),
+                $bonanzaPlan->getPlanPackageType()
+            ];
+        }
+
+        $symfonyStyle->table($header, $body);
+
+        return $proxyBonanzaPlans;
     }
 
     /**
