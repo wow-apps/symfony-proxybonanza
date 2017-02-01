@@ -33,8 +33,8 @@ class ProxyBonanzaProxiesRepository extends AbstractRepository
 
             /** @var ProxyBonanzaPack $ipPack */
             foreach ($proxyBonanzaPlan->getIppacks() as $ipPack) {
-                $proxyBonanzaProxyEntity = new ProxyBonanzaProxies();
-                $proxyBonanzaProxyEntity
+                $proxyEntity = new ProxyBonanzaProxies();
+                $proxyEntity
                     ->setProxyPlan($proxyBonanzaPlan->getPlanId())
                     ->setProxyIp($ipPack->getPackIp())
                     ->setProxyPortHttp($ipPack->getPackPortHttp())
@@ -44,7 +44,7 @@ class ProxyBonanzaProxiesRepository extends AbstractRepository
                     ->setProxyRegionCountryName($ipPack->getPackRegionCountryName())
                 ;
 
-                $this->em->persist($proxyBonanzaProxyEntity);
+                $this->em->persist($proxyEntity);
             }
         }
 

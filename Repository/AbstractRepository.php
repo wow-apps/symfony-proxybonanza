@@ -36,8 +36,8 @@ abstract class AbstractRepository extends EntityRepository
         $emptyValues = ['%', '%%', '_'];
         if (($value === 0) || (!empty($value) && !in_array($value, $emptyValues))) {
             return $this->db->quote($value);
-        } else {
-            return 'NULL';
         }
+
+        return 'NULL';
     }
 }

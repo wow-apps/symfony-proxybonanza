@@ -33,20 +33,20 @@ class ProxyBonanza
     /**
      * ProxyBonanza constructor.
      * @param array $config
-     * @param ProxyBonanzaPlanRepository $proxyBonanzaPlanRepository
-     * @param ProxyBonanzaProxiesRepository $proxyBonanzaProxiesRepository
-     * @param ProxyBonanzaAuthIpsRepository $proxyBonanzaAuthIpsRepository
+     * @param ProxyBonanzaPlanRepository $planRepository
+     * @param ProxyBonanzaProxiesRepository $proxiesRepository
+     * @param ProxyBonanzaAuthIpsRepository $authIpsRepository
      */
     public function __construct(
         array $config,
-        ProxyBonanzaPlanRepository $proxyBonanzaPlanRepository,
-        ProxyBonanzaProxiesRepository $proxyBonanzaProxiesRepository,
-        ProxyBonanzaAuthIpsRepository $proxyBonanzaAuthIpsRepository
+        ProxyBonanzaPlanRepository $planRepository,
+        ProxyBonanzaProxiesRepository $proxiesRepository,
+        ProxyBonanzaAuthIpsRepository $authIpsRepository
     ) {
         $this->setConfig($config);
-        $this->proxyBonanzaPlanRepository = $proxyBonanzaPlanRepository;
-        $this->proxyBonanzaProxiesRepository = $proxyBonanzaProxiesRepository;
-        $this->proxyBonanzaAuthips = $proxyBonanzaAuthIpsRepository;
+        $this->proxyBonanzaPlanRepository = $planRepository;
+        $this->proxyBonanzaProxiesRepository = $proxiesRepository;
+        $this->proxyBonanzaAuthips = $authIpsRepository;
         $this->guzzleClient = new GuzzleClient(
             ['headers' => ['Authorization' => $this->config['api_key']]]
         );

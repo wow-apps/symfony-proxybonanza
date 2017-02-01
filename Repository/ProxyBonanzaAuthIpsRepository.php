@@ -30,13 +30,13 @@ class ProxyBonanzaAuthIpsRepository extends AbstractRepository
             }
 
             foreach ($proxyBonanzaPlan->getAuthIps() as $authIp) {
-                $proxyBonanzaAuthIpsEntity = new ProxyBonanzaAuthIps();
-                $proxyBonanzaAuthIpsEntity
+                $aiEntity = new ProxyBonanzaAuthIps();
+                $aiEntity
                     ->setIp($authIp)
                     ->setPlan($proxyBonanzaPlan->getPlanId())
                 ;
 
-                $this->em->persist($proxyBonanzaAuthIpsEntity);
+                $this->em->persist($aiEntity);
             }
         }
 

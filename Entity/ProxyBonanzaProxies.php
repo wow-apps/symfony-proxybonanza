@@ -200,12 +200,12 @@ class ProxyBonanzaProxies
     }
 
     /**
-     * @param string $proxyRegionCountryName
+     * @param string $proxyRegionCountry
      * @return ProxyBonanzaProxies
      */
-    public function setProxyRegionCountryName(string $proxyRegionCountryName): ProxyBonanzaProxies
+    public function setProxyRegionCountryName(string $proxyRegionCountry): ProxyBonanzaProxies
     {
-        $this->proxyRegionCountryName = $proxyRegionCountryName;
+        $this->proxyRegionCountryName = $proxyRegionCountry;
         return $this;
     }
 }

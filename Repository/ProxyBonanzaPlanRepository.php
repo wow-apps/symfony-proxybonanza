@@ -25,8 +25,8 @@ class ProxyBonanzaPlanRepository extends AbstractRepository
         }
 
         foreach ($proxyBonzanaPlans as $proxyBonanzaPlan) {
-            $proxyBonanzaPlanEntity = new ProxyBonanzaPlan();
-            $proxyBonanzaPlanEntity
+            $planEntity = new ProxyBonanzaPlan();
+            $planEntity
                 ->setPlanId($proxyBonanzaPlan->getPlanId())
                 ->setPlanLogin($proxyBonanzaPlan->getPlanLogin())
                 ->setPlanPassword($proxyBonanzaPlan->getPlanPassword())
@@ -41,7 +41,7 @@ class ProxyBonanzaPlanRepository extends AbstractRepository
                 ->setPlanPackageType($proxyBonanzaPlan->getPlanPackageType())
             ;
 
-            $this->em->persist($proxyBonanzaPlanEntity);
+            $this->em->persist($planEntity);
         }
 
         $this->em->flush();

@@ -225,12 +225,12 @@ class ProxyBonanzaPlan
     }
 
     /**
-     * @param int $planPackageHowmanyIps
+     * @param int $howmanyIps
      * @return ProxyBonanzaPlan
      */
-    public function setPlanPackageHowmanyIps(int $planPackageHowmanyIps): ProxyBonanzaPlan
+    public function setPlanPackageHowmanyIps(int $howmanyIps): ProxyBonanzaPlan
     {
-        $this->planPackageHowmanyIps = $planPackageHowmanyIps;
+        $this->planPackageHowmanyIps = $howmanyIps;
         return $this;
     }
 
@@ -243,12 +243,12 @@ class ProxyBonanzaPlan
     }
 
     /**
-     * @param int $planPackagePricePerGig
+     * @param int $pricePerGig
      * @return ProxyBonanzaPlan
      */
-    public function setPlanPackagePricePerGig(int $planPackagePricePerGig): ProxyBonanzaPlan
+    public function setPlanPackagePricePerGig(int $pricePerGig): ProxyBonanzaPlan
     {
-        $this->planPackagePricePerGig = $planPackagePricePerGig;
+        $this->planPackagePricePerGig = $pricePerGig;
         return $this;
     }
 
@@ -317,13 +317,13 @@ class ProxyBonanzaPlan
     }
 
     /**
-     * @param int $ipId
-     * @param string $ip
+     * @param int $insertIpId
+     * @param string $insertIp
      * @return ProxyBonanzaPlan
      */
-    public function appendAuthIp(int $ipId, string $ip): ProxyBonanzaPlan
+    public function appendAuthIp(int $insertIpId, string $insertIp): ProxyBonanzaPlan
     {
-        $this->authIps[$ipId] = $ip;
+        $this->authIps[$insertIpId] = $insertIp;
         return $this;
     }
 }
