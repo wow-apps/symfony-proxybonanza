@@ -20,7 +20,7 @@ class ProxyBonanzaPlan
      * @ORM\Column(name="plan_id", type="integer")
      * @ORM\Id
      */
-    private $planId;
+    private $id;
 
     /**
      * @var string
@@ -91,18 +91,18 @@ class ProxyBonanzaPlan
     /**
      * @return int
      */
-    public function getPlanId(): int
+    public function getId(): int
     {
-        return $this->planId;
+        return $this->id;
     }
 
     /**
-     * @param int $planId
+     * @param int $id
      * @return ProxyBonanzaPlan
      */
-    public function setPlanId(int $planId): ProxyBonanzaPlan
+    public function setId(int $id): ProxyBonanzaPlan
     {
-        $this->planId = $planId;
+        $this->id = $id;
         return $this;
     }
 

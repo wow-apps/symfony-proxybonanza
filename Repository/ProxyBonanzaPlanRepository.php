@@ -27,7 +27,7 @@ class ProxyBonanzaPlanRepository extends AbstractRepository
         foreach ($proxyBonzanaPlans as $proxyBonanzaPlan) {
             $planEntity = new ProxyBonanzaPlan();
             $planEntity
-                ->setPlanId($proxyBonanzaPlan->getPlanId())
+                ->setId($proxyBonanzaPlan->getPlanId())
                 ->setPlanLogin($proxyBonanzaPlan->getPlanLogin())
                 ->setPlanPassword($proxyBonanzaPlan->getPlanPassword())
                 ->setPlanExpires($proxyBonanzaPlan->getPlanExpires())
@@ -56,7 +56,7 @@ class ProxyBonanzaPlanRepository extends AbstractRepository
     public function getLocalPlan(int $planId): ProxyBonanzaPlanDTO
     {
         /** @var ProxyBonanzaPlan $proxyBonanzaPlan */
-        $proxyBonanzaPlan = $this->findOneBy(['planId' => $planId]);
+        $proxyBonanzaPlan = $this->findOneBy(['id' => $planId]);
         $proxyBonanzaPlanDTO = $this->convertEntity2DTO($proxyBonanzaPlan);
 
         return $proxyBonanzaPlanDTO;
@@ -86,7 +86,7 @@ class ProxyBonanzaPlanRepository extends AbstractRepository
     {
         $proxyBonanzaPlanDTO = new ProxyBonanzaPlanDTO();
         $proxyBonanzaPlanDTO
-            ->setPlanId($proxyBonanzaPlan->getPlanId())
+            ->setPlanId($proxyBonanzaPlan->getId())
             ->setPlanLogin($proxyBonanzaPlan->getPlanLogin())
             ->setPlanPassword($proxyBonanzaPlan->getPlanPassword())
             ->setPlanExpires($proxyBonanzaPlan->getPlanExpires())
