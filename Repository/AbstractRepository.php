@@ -10,21 +10,21 @@ use Doctrine\ORM\Mapping;
 abstract class AbstractRepository extends EntityRepository
 {
     /** @var PDOConnection */
-    protected $db;
+    protected $pdoDB;
 
     /** @var EntityManager */
-    protected $em;
+    protected $entityManager;
 
     /**
      * AbstractRepository constructor.
-     * @param EntityManager $em
+     * @param EntityManager $entityManager
      * @param Mapping\ClassMetadata $class
      */
-    public function __construct(EntityManager $em, Mapping\ClassMetadata $class)
+    public function __construct(EntityManager $entityManager, Mapping\ClassMetadata $class)
     {
-        parent::__construct($em, $class);
-        $this->em = $em;
-        $this->db = $em->getConnection();
+        parent::__construct($entityManager, $class);
+        $this->entityManager = $entityManager;
+        $this->pdoDB = $entityManager->getConnection();
     }
 
     /**
@@ -35,7 +35,7 @@ abstract class AbstractRepository extends EntityRepository
     {
         $emptyValues = ['%', '%%', '_'];
         if (($value === 0) || (!empty($value) && !in_array($value, $emptyValues))) {
-            return $this->db->quote($value);
+            return $this->pdoDB->quote($value);
         }
 
         return 'NULL';

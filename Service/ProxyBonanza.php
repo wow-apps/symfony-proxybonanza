@@ -4,8 +4,6 @@ namespace WowApps\ProxyBonanzaBundle\Service;
 
 use GuzzleHttp\Client as GuzzleClient;
 use GuzzleHttp\Exception\ClientException;
-use WowApps\ProxyBonanzaBundle\DTO\ProxyBonanzaPack;
-use WowApps\ProxyBonanzaBundle\DTO\ProxyBonanzaPlan;
 use WowApps\ProxyBonanzaBundle\Repository\ProxyBonanzaAuthIpsRepository;
 use WowApps\ProxyBonanzaBundle\Repository\ProxyBonanzaPlanRepository;
 use WowApps\ProxyBonanzaBundle\Repository\ProxyBonanzaProxiesRepository;
