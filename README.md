@@ -1,9 +1,9 @@
 ![ProxyBonanza for Symfony 3](http://cdn.wow-apps.pro/proxybonanza/proxybonanza-banner.jpg)
 
 # symfony-proxybonanza
-[![SensioLabsInsight](https://insight.sensiolabs.com/projects/a42c70a3-fdbb-4b66-8e7f-b9feefd37bb2/big.png)](https://insight.sensiolabs.com/projects/a42c70a3-fdbb-4b66-8e7f-b9feefd37bb2)
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/a42c70a3-fdbb-4b66-8e7f-b9feefd37bb2/big.png?version=none)](https://insight.sensiolabs.com/projects/a42c70a3-fdbb-4b66-8e7f-b9feefd37bb2)
 
-[![Packagist Pre Release](https://img.shields.io/packagist/v/wow-apps/symfony-proxybonanza.svg?maxAge=2592000?style=flat-square)](https://packagist.org/packages/wow-apps/symfony-proxybonanza)
+[![Packagist Pre Release](https://img.shields.io/packagist/v/wow-apps/symfony-proxybonanza.svg?maxAge=2592000&style=flat-square&version=none)](https://packagist.org/packages/wow-apps/symfony-proxybonanza)
 [![PHP version](https://img.shields.io/badge/PHP-%5E7.0-blue.svg?style=flat-square)](http://php.net/manual/ru/migration70.new-features.php)
 [![Symfony version](https://img.shields.io/badge/Symfony-%5E3.0-green.svg?style=flat-square)](http://symfony.com/)
 [![GitHub license](https://img.shields.io/badge/license-Apache%202-blue.svg?style=flat-square)](https://raw.githubusercontent.com/wow-apps/symfony-proxybonanza/master/LICENSE)
@@ -11,7 +11,7 @@
 [![Code Climate](https://codeclimate.com/github/wow-apps/symfony-proxybonanza/badges/gpa.svg)](https://codeclimate.com/github/wow-apps/symfony-proxybonanza)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/6735a58510de4603a8605feb34d7426d)](https://www.codacy.com/app/lion-samara/symfony-proxybonanza?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=wow-apps/symfony-proxybonanza&amp;utm_campaign=Badge_Grade)
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/a42c70a3-fdbb-4b66-8e7f-b9feefd37bb2/mini.png)](https://insight.sensiolabs.com/projects/a42c70a3-fdbb-4b66-8e7f-b9feefd37bb2)
-[![Twitter](https://img.shields.io/twitter/url/https/github.com/wow-apps/symfony-proxybonanza.svg?style=social?style=flat-square)](https://twitter.com/intent/tweet?text=SlackBot+for+Symfony+3&url=%5Bobject%20Object%5D)
+[![Twitter](https://img.shields.io/twitter/url/https/github.com/wow-apps/symfony-proxybonanza.svg?style=social?style=flat-square)](https://twitter.com/intent/tweet?text=ProxyBonzana+API+for+Symfony+3&url=%5Bobject%20Object%5D)
 
 
 Symfony 3 Bundle for easy update, test and use proxy list from [ProxyBonanza](http://proxybonanza.com/) service.
