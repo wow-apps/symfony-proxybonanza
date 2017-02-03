@@ -8,8 +8,8 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
-use WowApps\ProxyBonanzaBundle\DTO\ProxyBonanzaPack;
-use WowApps\ProxyBonanzaBundle\DTO\ProxyBonanzaPlan;
+use WowApps\ProxyBonanzaBundle\Entity\Plan;
+use WowApps\ProxyBonanzaBundle\Entity\Proxy;
 use WowApps\ProxyBonanzaBundle\Service\ProxyBonanza;
 use WowApps\ProxyBonanzaBundle\Traits\HelperTrait;
 
@@ -38,15 +38,15 @@ class ProxybonanzaUpdateCommand extends ContainerAwareCommand
 
         $symfonyStyle->title(' P R O X Y   B O N A N Z A   U P D A T E ');
 
-        $proxyBonanzaPlans = $this->getRemotePlans($proxyBonanza, $symfonyStyle);
+        $pbPlans = $this->getRemotePlans($proxyBonanza, $symfonyStyle);
 
-        if (!$input->getOption('skip-tests') && $proxyBonanzaPlans->count()) {
-            $this->testProxies($proxyBonanza, $proxyBonanzaPlans, $symfonyStyle);
+        if (!$input->getOption('skip-tests') && $pbPlans->count()) {
+            $this->testProxies($proxyBonanza, $pbPlans, $symfonyStyle);
         }
 
         $symfonyStyle->section('Updating local data from remote ...');
 
-        $proxyBonanza->updateLocalDataFromRemote($proxyBonanzaPlans);
+        $proxyBonanza->updateLocalDataFromRemote($pbPlans);
 
         $symfonyStyle->success('Proxy list has been updated');
 
@@ -58,7 +58,7 @@ class ProxybonanzaUpdateCommand extends ContainerAwareCommand
     /**
      * @param ProxyBonanza $proxyBonanza
      * @param SymfonyStyle $symfonyStyle
-     * @return \ArrayObject|ProxyBonanzaPlan[]
+     * @return \ArrayObject|Plan[]
      */
     private function getRemotePlans(ProxyBonanza $proxyBonanza, SymfonyStyle $symfonyStyle)
     {
@@ -68,15 +68,14 @@ class ProxybonanzaUpdateCommand extends ContainerAwareCommand
         $symfonyStyle->createProgressBar(100);
         $symfonyStyle->progressStart(0);
 
-        /** @var \ArrayObject|ProxyBonanzaPlan[] $proxyBonanzaPlans */
-        $proxyBonanzaPlans = $proxyBonanza->getRemotePlans();
-        if (!$proxyBonanzaPlans->count()) {
-            return $proxyBonanzaPlans;
+        $pbPlans = $proxyBonanza->getRemotePlans();
+        if (!$pbPlans->count()) {
+            return $pbPlans;
         }
 
         $symfonyStyle->progressAdvance(50);
 
-        $proxyBonanzaPlans = $proxyBonanza->getRemotePacks($proxyBonanzaPlans);
+        $pbPlans = $proxyBonanza->getRemotePacks($pbPlans);
 
         $symfonyStyle->progressAdvance(50);
 
@@ -99,51 +98,52 @@ class ProxybonanzaUpdateCommand extends ContainerAwareCommand
 
         $body = [];
 
-        foreach ($proxyBonanzaPlans as $bonanzaPlan) {
+        /** @var Plan $pbPlan */
+        foreach ($pbPlans as $pbPlan) {
             $body[] = [
-                $bonanzaPlan->getPlanId(),
-                $bonanzaPlan->getPlanLogin(),
-                $bonanzaPlan->getPlanPassword(),
-                $bonanzaPlan->getPlanExpires()->format('Y-m-d H:i'),
-                $this->formatSizeUnits($bonanzaPlan->getPlanBandwidth(), 2),
-                $bonanzaPlan->getPlanLastIpChange()->format('Y-m-d H:i'),
-                $bonanzaPlan->getPlanPackageName(),
-                $this->formatSizeUnits($bonanzaPlan->getPlanPackageBandwidth(), 2),
-                $bonanzaPlan->getPlanPackagePrice(),
-                $bonanzaPlan->getPlanPackageHowmanyIps(),
-                $bonanzaPlan->getPlanPackagePricePerGig(),
-                $bonanzaPlan->getPlanPackageType()
+                $pbPlan->getId(),
+                $pbPlan->getLogin(),
+                $pbPlan->getPassword(),
+                $pbPlan->getExpires()->format('Y-m-d H:i'),
+                $this->formatSizeUnits($pbPlan->getBandwidth(), 2),
+                $pbPlan->getLastIpChange()->format('Y-m-d H:i'),
+                $pbPlan->getPackageName(),
+                $this->formatSizeUnits($pbPlan->getPackageBandwidth(), 2),
+                $pbPlan->getPackagePrice(),
+                $pbPlan->getPackageHowmanyIps(),
+                $pbPlan->getPackagePricePerGig(),
+                $pbPlan->getPackageType()
             ];
         }
 
         $symfonyStyle->table($header, $body);
 
-        return $proxyBonanzaPlans;
+        return $pbPlans;
     }
 
     /**
      * @param ProxyBonanza $proxyBonanza
-     * @param \ArrayObject|ProxyBonanzaPlan[] $proxyBonanzaPlans
+     * @param \ArrayObject|Plan[] $pbPlans
      * @param SymfonyStyle $symfonyStyle
      */
     private function testProxies(
         ProxyBonanza $proxyBonanza,
-        \ArrayObject $proxyBonanzaPlans,
+        \ArrayObject $pbPlans,
         SymfonyStyle $symfonyStyle
     ) {
-        /** @var ProxyBonanzaPlan $proxyBonanzaPlan */
-        foreach ($proxyBonanzaPlans as $proxyBonanzaPlan) {
+        /** @var Plan $pbPlans */
+        foreach ($pbPlans as $pbPlan) {
             $brokenProxies = new \ArrayObject();
 
-            $symfonyStyle->section(sprintf(' Testing proxies of plan #%d ', $proxyBonanzaPlan->getPlanId()));
+            $symfonyStyle->section(sprintf(' Testing remote proxies of plan #%d ', $pbPlan->getId()));
 
             $symfonyStyle->createProgressBar();
-            $symfonyStyle->progressStart($proxyBonanzaPlan->getPlanPackageHowmanyIps());
+            $symfonyStyle->progressStart($pbPlan->getPackageHowmanyIps());
 
-            /** @var ProxyBonanzaPack $ipPack */
-            foreach ($proxyBonanzaPlan->getIppacks() as $ipPack) {
-                if (!$proxyBonanza->testProxyConnection($ipPack)) {
-                    $brokenProxies->append($ipPack);
+            /** @var Proxy $proxy */
+            foreach ($pbPlan->getProxy() as $proxy) {
+                if (!$proxyBonanza->testProxyConnection($proxy)) {
+                    $brokenProxies->append($proxy);
                 }
 
                 $symfonyStyle->progressAdvance(1);
@@ -152,7 +152,7 @@ class ProxybonanzaUpdateCommand extends ContainerAwareCommand
             $symfonyStyle->progressFinish();
 
             if ($brokenProxies->count()) {
-                $symfonyStyle->warning(sprintf('%d proxies doesn\'t work!', $brokenProxies->count()));
+                $symfonyStyle->warning(sprintf('%d remote proxies doesn\'t work!', $brokenProxies->count()));
 
                 $header = [
                     'ip',
@@ -163,13 +163,13 @@ class ProxybonanzaUpdateCommand extends ContainerAwareCommand
 
                 $body = [];
 
-                /** @var ProxyBonanzaPack $brokenProxy */
+                /** @var Proxy $brokenProxy */
                 foreach ($brokenProxies as $brokenProxy) {
                     $body[] = [
-                        $brokenProxy->getPackIp(),
-                        $brokenProxy->getPackPortHttp(),
-                        $brokenProxy->getPackLogin(),
-                        $brokenProxy->getPackPassword()
+                        $brokenProxy->getProxyIp(),
+                        $brokenProxy->getProxyPortHttp(),
+                        $brokenProxy->getPlan()->getLogin(),
+                        $brokenProxy->getPlan()->getPassword()
                     ];
                 }
 
