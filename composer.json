@@ -31,8 +31,8 @@
         "doctrine/orm": "^2.5"
     },
     "autoload" : {
-        "psr-0" : {
-            "WowApps\\ProxyBonanzaBundle" : ""
+        "psr-4" : {
+            "WowApps\\ProxyBonanzaBundle\\" : ""
         }
     }
 }
