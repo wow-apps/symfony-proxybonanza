@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  *     name="proxybonanza_proxies",
  *     options={"collate"="utf8_unicode_ci", "charset"="utf8", "engine"="InnoDB"}
  * )
- * @ORM\Entity(repositoryClass="WowApps\ProxyBonanzaBundle\Repository\ProxiesRepository")
+ * @ORM\Entity(repositoryClass="Wowapps\ProxyBonanzaBundle\Repository\ProxiesRepository")
  */
 class Proxy
 {

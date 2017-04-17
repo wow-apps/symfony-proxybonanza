@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  *     name="proxybonanza_auth_ips",
  *     options={"collate"="utf8_unicode_ci", "charset"="utf8", "engine"="InnoDB"}
  * )
- * @ORM\Entity(repositoryClass="WowApps\ProxyBonanzaBundle\Repository\AuthIpsRepository")
+ * @ORM\Entity(repositoryClass="Wowapps\ProxyBonanzaBundle\Repository\AuthIpsRepository")
  */
 class AuthIps
 {
