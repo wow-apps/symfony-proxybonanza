@@ -1,6 +1,6 @@
 <?php
 
-namespace WowApps\ProxyBonanzaBundle\Repository;
+namespace Wowapps\ProxyBonanzaBundle\Repository;
 
 use Doctrine\DBAL\Driver\PDOConnection;
 use Doctrine\ORM\EntityManager;

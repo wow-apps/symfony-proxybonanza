@@ -1,6 +1,6 @@
 <?php
 
-namespace WowApps\ProxyBonanzaBundle\Traits;
+namespace Wowapps\ProxyBonanzaBundle\Traits;
 
 trait HelperTrait
 {

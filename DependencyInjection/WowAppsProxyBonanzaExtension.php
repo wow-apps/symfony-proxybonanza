@@ -1,6 +1,6 @@
 <?php
 
-namespace WowApps\ProxyBonanzaBundle\DependencyInjection;
+namespace Wowapps\ProxyBonanzaBundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;

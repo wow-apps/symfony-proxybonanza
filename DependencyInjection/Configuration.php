@@ -1,6 +1,6 @@
 <?php
 
-namespace WowApps\ProxyBonanzaBundle\DependencyInjection;
+namespace Wowapps\ProxyBonanzaBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -18,7 +18,7 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('wow_apps_proxy_bonanza');
+        $rootNode = $treeBuilder->root('wowapps_proxybonanza');
 
         $rootNode
             ->children()

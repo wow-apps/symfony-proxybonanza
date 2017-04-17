@@ -1,6 +1,6 @@
 services:
     wowapps.proxybonanza:
-        class: WowApps\ProxyBonanzaBundle\Service\ProxyBonanza
+        class: Wowapps\ProxyBonanzaBundle\Service\ProxyBonanza
         arguments:
             - %wowapps.proxybonanza.config%
             - "@proxybonanza.plan.repository"

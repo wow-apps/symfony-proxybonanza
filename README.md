@@ -29,7 +29,7 @@ Symfony 3 Bundle for easy update, test and use proxy list from [ProxyBonanza](ht
 
 ```json
 "require": {
-        "wow-apps/symfony-proxybonanza": "^1.0.0"
+        "wow-apps/symfony-proxybonanza": "^1"
 }
 ```
 
@@ -48,7 +48,7 @@ public function registerBundles()
 {
     $bundles = array(
         // ...
-        new WowApps\ProxyBonanzaBundle\WowAppsProxyBonanzaBundle()
+        new Wowapps\ProxyBonanzaBundle\WowAppsProxyBonanzaBundle()
     );
 
     // ...
@@ -62,7 +62,7 @@ public function registerBundles()
 
 ```yaml
 # ProxyBonanza API
-wow_apps_proxy_bonanza:
+wowapps_proxybonanza:
     api_url: "https://api.proxybonanza.com/v1/"
     api_key: "testAPIkey" # API key can be obtained in user panel in 'Account settings'.
 ```

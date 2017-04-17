@@ -1,6 +1,6 @@
 <?php
 
-namespace WowApps\ProxyBonanzaBundle\Controller;
+namespace Wowapps\ProxyBonanzaBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 

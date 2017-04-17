@@ -1,13 +1,13 @@
 services:
     proxybonanza.plan.repository:
-        class: WowApps\ProxyBonanzaBundle\Repository\PlanRepository
+        class: Wowapps\ProxyBonanzaBundle\Repository\PlanRepository
         factory: ["@doctrine.orm.entity_manager", "getRepository"]
         arguments: ['WowApps\ProxyBonanzaBundle\Entity\Plan']
     proxybonanza.proxies.repository:
-        class: WowApps\ProxyBonanzaBundle\Repository\ProxiesRepository
+        class: Wowapps\ProxyBonanzaBundle\Repository\ProxiesRepository
         factory: ["@doctrine.orm.entity_manager", "getRepository"]
         arguments: ['WowApps\ProxyBonanzaBundle\Entity\Proxy']
     proxybonanza.authips.repository:
-        class: WowApps\ProxyBonanzaBundle\Repository\AuthIpsRepository
+        class: Wowapps\ProxyBonanzaBundle\Repository\AuthIpsRepository
         factory: ["@doctrine.orm.entity_manager", "getRepository"]
         arguments: ['WowApps\ProxyBonanzaBundle\Entity\AuthIps']

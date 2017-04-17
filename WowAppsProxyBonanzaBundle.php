@@ -1,6 +1,6 @@
 <?php
 
-namespace WowApps\ProxyBonanzaBundle;
+namespace Wowapps\ProxyBonanzaBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 

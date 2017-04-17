@@ -1,6 +1,6 @@
 <?php
 
-namespace WowApps\ProxyBonanzaBundle\Entity;
+namespace Wowapps\ProxyBonanzaBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 

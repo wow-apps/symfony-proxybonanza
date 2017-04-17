@@ -1,16 +1,16 @@
 <?php
 
-namespace WowApps\ProxyBonanzaBundle\Service;
+namespace Wowapps\ProxyBonanzaBundle\Service;
 
 use GuzzleHttp\Client as GuzzleClient;
 use GuzzleHttp\Exception\ClientException;
-use WowApps\ProxyBonanzaBundle\Entity\AuthIps;
-use WowApps\ProxyBonanzaBundle\Entity\Plan;
-use WowApps\ProxyBonanzaBundle\Entity\Proxy;
-use WowApps\ProxyBonanzaBundle\Repository\AuthIpsRepository;
-use WowApps\ProxyBonanzaBundle\Repository\PlanRepository;
-use WowApps\ProxyBonanzaBundle\Repository\ProxiesRepository;
-use WowApps\ProxyBonanzaBundle\Traits\HelperTrait;
+use Wowapps\ProxyBonanzaBundle\Entity\AuthIps;
+use Wowapps\ProxyBonanzaBundle\Entity\Plan;
+use Wowapps\ProxyBonanzaBundle\Entity\Proxy;
+use Wowapps\ProxyBonanzaBundle\Repository\AuthIpsRepository;
+use Wowapps\ProxyBonanzaBundle\Repository\PlanRepository;
+use Wowapps\ProxyBonanzaBundle\Repository\ProxiesRepository;
+use Wowapps\ProxyBonanzaBundle\Traits\HelperTrait;
 
 class ProxyBonanza
 {

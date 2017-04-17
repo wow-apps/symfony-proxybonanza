@@ -1,9 +1,9 @@
 <?php
 
-namespace WowApps\ProxyBonanzaBundle\Repository;
+namespace Wowapps\ProxyBonanzaBundle\Repository;
 
-use WowApps\ProxyBonanzaBundle\Entity\Plan;
-use WowApps\ProxyBonanzaBundle\Entity\Proxy;
+use Wowapps\ProxyBonanzaBundle\Entity\Plan;
+use Wowapps\ProxyBonanzaBundle\Entity\Proxy;
 
 class ProxiesRepository extends AbstractRepository
 {
