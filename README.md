@@ -62,7 +62,7 @@ public function registerBundles()
 
 ```yaml
 # ProxyBonanza API
-wowapps_proxybonanza:
+wowapps_proxy_bonanza:
     api_url: "https://api.proxybonanza.com/v1/"
     api_key: "testAPIkey" # API key can be obtained in user panel in 'Account settings'.
 ```

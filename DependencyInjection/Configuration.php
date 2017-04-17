@@ -18,7 +18,7 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('wowapps_proxybonanza');
+        $rootNode = $treeBuilder->root('wowapps_proxy_bonanza');
 
         $rootNode
             ->children()
