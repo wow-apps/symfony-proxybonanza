@@ -48,7 +48,7 @@ public function registerBundles()
 {
     $bundles = array(
         // ...
-        new Wowapps\ProxyBonanzaBundle\WowAppsProxyBonanzaBundle()
+        new Wowapps\ProxyBonanzaBundle\WowappsProxyBonanzaBundle()
     );
 
     // ...
