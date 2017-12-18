@@ -1,6 +1,6 @@
 {
     "name": "wow-apps/symfony-proxybonanza",
-    "description" : "ProxyBonzana API for Symfony 3",
+    "description" : "ProxyBonzana API for Symfony 3 and 4",
     "type" : "symfony-bundle",
     "homepage": "https://github.com/wow-apps/symfony-proxybonanza",
     "authors" : [{
@@ -16,17 +16,19 @@
     },
     "keywords" : [
         "symfony",
-        "symfony 3",
+        "symfony3",
+        "symfony4",
         "proxy",
         "api",
         "proxybonanza"
     ],
     "license" : [
-        "Apache-2.0"
+        "MIT"
     ],
     "require" : {
         "php": "^7.0",
-        "symfony/symfony": "^3.0",
+        "symfony/framework-bundle": "^3.3|^4.0",
+        "symfony/yaml": "^3.3|^4.0",
         "guzzlehttp/guzzle": "^6.0",
         "doctrine/orm": "^2.5"
     },
