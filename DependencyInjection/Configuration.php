@@ -1,14 +1,23 @@
 <?php
+/**
+ * This file is part of the wow-apps/symfony-proxybonanza project
+ * https://github.com/wow-apps/symfony-proxybonanza
+ *
+ * (c) 2016 WoW-Apps
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
-namespace Wowapps\ProxyBonanzaBundle\DependencyInjection;
+namespace WowApps\ProxybonanzaBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
 /**
- * This is the class that validates and merges configuration from your app/config files.
- *
- * To learn more see {@link http://symfony.com/doc/current/cookbook/bundles/configuration.html}
+ * Class Configuration
+ * @author Alexey Samara <lion.samara@gmail.com>
+ * @package wow-apps/symfony-proxybonanza
  */
 class Configuration implements ConfigurationInterface
 {
@@ -18,7 +27,7 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('wowapps_proxy_bonanza');
+        $rootNode = $treeBuilder->root('wow_apps_proxybonanza');
 
         $rootNode
             ->children()

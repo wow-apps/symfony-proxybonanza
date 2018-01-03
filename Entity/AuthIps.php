@@ -1,15 +1,27 @@
 <?php
+/**
+ * This file is part of the wow-apps/symfony-proxybonanza project
+ * https://github.com/wow-apps/symfony-proxybonanza
+ *
+ * (c) 2017 WoW-Apps
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
-namespace Wowapps\ProxyBonanzaBundle\Entity;
+namespace WowApps\ProxybonanzaBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
+ * Class AuthIps
  * @ORM\Table(
  *     name="proxybonanza_auth_ips",
  *     options={"collate"="utf8_unicode_ci", "charset"="utf8", "engine"="InnoDB"}
  * )
- * @ORM\Entity(repositoryClass="Wowapps\ProxyBonanzaBundle\Repository\AuthIpsRepository")
+ * @ORM\Entity(repositoryClass="WowApps\ProxybonanzaBundle\Repository\AuthIpsRepository")
+ * @author Alexey Samara <lion.samara@gmail.com>
+ * @package wow-apps/symfony-proxybonanza
  */
 class AuthIps
 {

@@ -34,7 +34,7 @@
     },
     "autoload" : {
         "psr-4" : {
-            "Wowapps\\ProxyBonanzaBundle\\" : ""
+            "WowApps\\ProxybonanzaBundle\\" : ""
         }
     }
 }

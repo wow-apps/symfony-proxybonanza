@@ -1,17 +1,31 @@
 <?php
+/**
+ * This file is part of the wow-apps/symfony-proxybonanza project
+ * https://github.com/wow-apps/symfony-proxybonanza
+ *
+ * (c) 2016 WoW-Apps
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
-namespace Wowapps\ProxyBonanzaBundle\Service;
+namespace WowApps\ProxybonanzaBundle\Service;
 
 use GuzzleHttp\Client as GuzzleClient;
 use GuzzleHttp\Exception\ClientException;
-use Wowapps\ProxyBonanzaBundle\Entity\AuthIps;
-use Wowapps\ProxyBonanzaBundle\Entity\Plan;
-use Wowapps\ProxyBonanzaBundle\Entity\Proxy;
-use Wowapps\ProxyBonanzaBundle\Repository\AuthIpsRepository;
-use Wowapps\ProxyBonanzaBundle\Repository\PlanRepository;
-use Wowapps\ProxyBonanzaBundle\Repository\ProxiesRepository;
-use Wowapps\ProxyBonanzaBundle\Traits\HelperTrait;
+use WowApps\ProxybonanzaBundle\Entity\AuthIps;
+use WowApps\ProxybonanzaBundle\Entity\Plan;
+use WowApps\ProxybonanzaBundle\Entity\Proxy;
+use WowApps\ProxybonanzaBundle\Repository\AuthIpsRepository;
+use WowApps\ProxybonanzaBundle\Repository\PlanRepository;
+use WowApps\ProxybonanzaBundle\Repository\ProxiesRepository;
+use WowApps\ProxybonanzaBundle\Traits\HelperTrait;
 
+/**
+ * Class ProxyBonanza
+ * @author Alexey Samara <lion.samara@gmail.com>
+ * @package wow-apps/symfony-proxybonanza
+ */
 class ProxyBonanza
 {
     use HelperTrait;

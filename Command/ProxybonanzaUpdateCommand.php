@@ -1,17 +1,31 @@
 <?php
+/**
+ * This file is part of the wow-apps/symfony-proxybonanza project
+ * https://github.com/wow-apps/symfony-proxybonanza
+ *
+ * (c) 2016 WoW-Apps
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
-namespace Wowapps\ProxyBonanzaBundle\Command;
+namespace WowApps\ProxybonanzaBundle\Command;
 
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
-use Wowapps\ProxyBonanzaBundle\Entity\Plan;
-use Wowapps\ProxyBonanzaBundle\Entity\Proxy;
-use Wowapps\ProxyBonanzaBundle\Service\ProxyBonanza;
-use Wowapps\ProxyBonanzaBundle\Traits\HelperTrait;
+use WowApps\ProxybonanzaBundle\Entity\Plan;
+use WowApps\ProxybonanzaBundle\Entity\Proxy;
+use WowApps\ProxybonanzaBundle\Service\ProxyBonanza;
+use WowApps\ProxybonanzaBundle\Traits\HelperTrait;
 
+/**
+ * Class ProxybonanzaUpdateCommand
+ * @author Alexey Samara <lion.samara@gmail.com>
+ * @package wow-apps/symfony-proxybonanza
+ */
 class ProxybonanzaUpdateCommand extends ContainerAwareCommand
 {
     use HelperTrait;
@@ -19,12 +33,17 @@ class ProxybonanzaUpdateCommand extends ContainerAwareCommand
     protected function configure()
     {
         $this
-            ->setName('proxybonanza:update')
+            ->setName('wowapps:proxybonanza:update')
             ->setDescription('Update proxy list from ProxyBonanza')
             ->addOption('skip-tests', null, InputOption::VALUE_NONE, 'Skip test of every remote proxy')
         ;
     }
 
+    /**
+     * @param InputInterface $input
+     * @param OutputInterface $output
+     * @return int|null|void
+     */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $timeStart = microtime(true);

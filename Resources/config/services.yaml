@@ -1,8 +1,11 @@
 services:
     wowapps.proxybonanza:
-        class: Wowapps\ProxyBonanzaBundle\Service\ProxyBonanza
+        alias: WowApps\ProxybonanzaBundle\Service\ProxyBonanza
+        public: true
+    WowApps\ProxybonanzaBundle\Service\ProxyBonanza:
+        public: false
         arguments:
-            - %wowapps.proxybonanza.config%
-            - "@proxybonanza.plan.repository"
-            - "@proxybonanza.proxies.repository"
-            - "@proxybonanza.authips.repository"
+            - '%wowapps.proxybonanza.config%'
+            - '@proxybonanza.plan.repository'
+            - '@proxybonanza.proxies.repository'
+            - '@proxybonanza.authips.repository'
